@@ -58,7 +58,7 @@ def reverse(arr: StaticArray) -> None:
     # Even array
     if(arr.length() % 2 == 0):
       loopRange = int(arr.length() / 2)
-      print("loopRange", loopRange)
+      #print("loopRange", loopRange)
       for i in range(0, loopRange):
         # print(i)
         # print(arr[arr.length() - 1 - i])
@@ -73,7 +73,7 @@ def reverse(arr: StaticArray) -> None:
         arr[i] = arr[arr.length() - 1 - i]
         arr[arr.length() - 1 - i] = temp
 
-    return arr
+    #return arr
 
 # ------------------- PROBLEM 4 - ROTATE ------------------------------------
 
@@ -125,10 +125,12 @@ def sa_range(start: int, end: int) -> StaticArray:
     if( start < end):
       if(start < 0 and end >= 0):
         loopRange = end - start
+        newArraySize = loopRange + 1
+        newArray = StaticArray(newArraySize)
       else:   
         loopRange = abs(abs(end) - abs(start))
-      newArraySize = loopRange + 1
-      newArray = StaticArray(newArraySize)
+        newArraySize = loopRange + 1
+        newArray = StaticArray(newArraySize)
       for i in range(0, loopRange):
         newArray[i + 1] = start + i + 1
       newArray[0] = start
