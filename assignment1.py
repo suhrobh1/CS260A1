@@ -206,15 +206,21 @@ def find_mode(arr: StaticArray) -> (int, int):
       
     for i in range(0, arr.length() - 1):
       if(arr[i] == arr[i + 1]):
-        if(mode == arr[i]):
+        if(mode != arr[0]):
           mode = arr[i]
+          frequency += 1
+        elif(mode == arr[i]):
           frequency += 1
         elif(mode != arr[i]):
           tempFrequency += 1
+        
+          
           
       if(frequency < tempFrequency):
         frequency = tempFrequency
         mode = arr[i]
+    
+        
       
     return (mode, frequency)
 # ------------------- PROBLEM 8 - REMOVE_DUPLICATES -------------------------
