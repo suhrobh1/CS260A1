@@ -197,6 +197,13 @@ def find_mode(arr: StaticArray) -> (int, int):
     mode = arr[0]
     frequency = 1
     tempFrequency = 1
+
+    if(arr.length() == 2):
+      if(arr[0] == arr[1]):
+         mode = arr[0]
+         frequency = 2
+         return (mode, frequency) 
+      
     for i in range(0, arr.length() - 1):
       if(arr[i] == arr[i + 1]):
         if(mode == arr[i]):
