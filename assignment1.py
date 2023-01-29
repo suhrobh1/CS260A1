@@ -128,7 +128,7 @@ def sa_range(start: int, end: int) -> StaticArray:
         newArraySize = loopRange + 1
         newArray = StaticArray(newArraySize)
       else:   
-        loopRange = abs(abs(end) - abs(start))
+        loopRange = abs(end - start)
         newArraySize = loopRange + 1
         newArray = StaticArray(newArraySize)
       for i in range(0, loopRange):
@@ -137,11 +137,14 @@ def sa_range(start: int, end: int) -> StaticArray:
       newArray[newArraySize - 1] = end
       
     elif(start > end):
-      if(start <= 0):
-        loopRange = abs(end) - abs(start)
+      if(start < 0):
+        loopRange = abs(abs(end) - abs(start))
         newArraySize = loopRange + 1
         newArray = StaticArray(newArraySize)
-      
+      elif(start >= 0):
+        loopRange = abs(start - abs(end))
+        newArraySize = loopRange + 1
+        newArray = StaticArray(newArraySize)
       for i in range(0, loopRange):
         newArray[i + 1] = start - i - 1  # Maybe + 1 somewhere else? 
         newArray[0] = start
