@@ -63,15 +63,15 @@ def reverse(arr: StaticArray) -> None:
         # print(i)
         # print(arr[arr.length() - 1 - i])
         temp = arr[i]
-        arr[i] = arr[arr.length()- 1 - i]
+        arr[i] = arr[arr.length() - 1 - i]
         arr[arr.length() - 1 - i] = temp
     # Odd array
     else:
       loopRange = int(arr.length() // 2) 
       for i in range(0, loopRange):
         temp = arr[i]
-        arr[i] = arr[arr.length() - i]
-        arr[arr.length()- 1 - i] = temp
+        arr[i] = arr[arr.length() -1 - i]
+        arr[arr.length() - 1 - i] = temp
 
     #return arr
 
