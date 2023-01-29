@@ -163,8 +163,31 @@ def is_sorted(arr: StaticArray) -> int:
     """
     TODO: Write this implementation
     """
-    pass
+    accending = None
+    decending = None
+    
+    if(arr.length() == 1):
+      # print("Array of 1")
+      return 1
+      
+    for i in range(0, arr.length() - 1):
+      
+      
+      if(arr[i] < arr[i + 1]): # first is smaller then next
+        if(decending):
+          return 0
+        accending = True
+        
+      elif(arr[i] > arr[i + 1]):
+        if(accending):
+          return 0
+        decending = True
+      else:
+        return 0
 
+    if accending:
+      return 1
+    return -1
 # ------------------- PROBLEM 7 - FIND_MODE -----------------------------------
 
 def find_mode(arr: StaticArray) -> (int, int):
@@ -202,91 +225,91 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
 
 if __name__ == "__main__":
 
-    print('\n# min_max example 1')
-    arr = StaticArray(5)
-    for i, value in enumerate([7, 8, 6, -5, 4]):
-        arr[i] = value
-    print(arr)
-    result = min_max(arr)
-    if result:
-        print(f"Min: {result[0]: 3}, Max: {result[1]}")
-    else:
-        print("min_max() not yet implemented")
+    # print('\n# min_max example 1')
+    # arr = StaticArray(5)
+    # for i, value in enumerate([7, 8, 6, -5, 4]):
+    #     arr[i] = value
+    # print(arr)
+    # result = min_max(arr)
+    # if result:
+    #     print(f"Min: {result[0]: 3}, Max: {result[1]}")
+    # else:
+    #     print("min_max() not yet implemented")
 
-    print('\n# min_max example 2')
-    arr = StaticArray(1)
-    arr[0] = 100
-    print(arr)
-    result = min_max(arr)
-    if result:
-        print(f"Min: {result[0]}, Max: {result[1]}")
-    else:
-        print("min_max() not yet implemented")
+    # print('\n# min_max example 2')
+    # arr = StaticArray(1)
+    # arr[0] = 100
+    # print(arr)
+    # result = min_max(arr)
+    # if result:
+    #     print(f"Min: {result[0]}, Max: {result[1]}")
+    # else:
+    #     print("min_max() not yet implemented")
 
-    print('\n# min_max example 3')
-    test_cases = (
-        [3, 3, 3],
-        [-10, -30, -5, 0, -10],
-        [25, 50, 0, 10],
-    )
-    for case in test_cases:
-        arr = StaticArray(len(case))
-        for i, value in enumerate(case):
-            arr[i] = value
-        print(arr)
-        result = min_max(arr)
-        if result:
-            print(f"Min: {result[0]: 3}, Max: {result[1]}")
-        else:
-            print("min_max() not yet implemented")
+    # print('\n# min_max example 3')
+    # test_cases = (
+    #     [3, 3, 3],
+    #     [-10, -30, -5, 0, -10],
+    #     [25, 50, 0, 10],
+    # )
+    # for case in test_cases:
+    #     arr = StaticArray(len(case))
+    #     for i, value in enumerate(case):
+    #         arr[i] = value
+    #     print(arr)
+    #     result = min_max(arr)
+    #     if result:
+    #         print(f"Min: {result[0]: 3}, Max: {result[1]}")
+    #     else:
+    #         print("min_max() not yet implemented")
 
-    print('\n# fizz_buzz example 1')
-    source = [_ for _ in range(-5, 20, 4)]
-    arr = StaticArray(len(source))
-    for i, value in enumerate(source):
-        arr[i] = value
-    print(fizz_buzz(arr))
-    print(arr)
+    # print('\n# fizz_buzz example 1')
+    # source = [_ for _ in range(-5, 20, 4)]
+    # arr = StaticArray(len(source))
+    # for i, value in enumerate(source):
+    #     arr[i] = value
+    # print(fizz_buzz(arr))
+    # print(arr)
 
-    print('\n# reverse example 1')
-    source = [_ for _ in range(-20, 20, 7)]
-    arr = StaticArray(len(source))
-    for i, value in enumerate(source):
-        arr.set(i, value)
-    print(arr)
-    reverse(arr)
-    print(arr)
-    reverse(arr)
-    print(arr)
+    # print('\n# reverse example 1')
+    # source = [_ for _ in range(-20, 20, 7)]
+    # arr = StaticArray(len(source))
+    # for i, value in enumerate(source):
+    #     arr.set(i, value)
+    # print(arr)
+    # reverse(arr)
+    # print(arr)
+    # reverse(arr)
+    # print(arr)
 
-    print('\n# rotate example 1')
-    source = [_ for _ in range(-20, 20, 7)]
-    arr = StaticArray(len(source))
-    for i, value in enumerate(source):
-        arr.set(i, value)
-    print(arr)
-    for steps in [1, 2, 0, -1, -2, 28, -100, 2 ** 28, -2 ** 31]:
-        space = " " if steps >= 0 else ""
-        print(f"{rotate(arr, steps)} {space}{steps}")
-    print(arr)
+    # print('\n# rotate example 1')
+    # source = [_ for _ in range(-20, 20, 7)]
+    # arr = StaticArray(len(source))
+    # for i, value in enumerate(source):
+    #     arr.set(i, value)
+    # print(arr)
+    # for steps in [1, 2, 0, -1, -2, 28, -100, 2 ** 28, -2 ** 31]:
+    #     space = " " if steps >= 0 else ""
+    #     print(f"{rotate(arr, steps)} {space}{steps}")
+    # print(arr)
 
-    print('\n# rotate example 2')
-    array_size = 1_000_000
-    source = [random.randint(-10 ** 9, 10 ** 9) for _ in range(array_size)]
-    arr = StaticArray(len(source))
-    for i, value in enumerate(source):
-        arr[i] = value
-    print(f'Started rotating large array of {array_size} elements')
-    rotate(arr, 3 ** 14)
-    rotate(arr, -3 ** 15)
-    print(f'Finished rotating large array of {array_size} elements')
+    # print('\n# rotate example 2')
+    # array_size = 1_000_000
+    # source = [random.randint(-10 ** 9, 10 ** 9) for _ in range(array_size)]
+    # arr = StaticArray(len(source))
+    # for i, value in enumerate(source):
+    #     arr[i] = value
+    # print(f'Started rotating large array of {array_size} elements')
+    # rotate(arr, 3 ** 14)
+    # rotate(arr, -3 ** 15)
+    # print(f'Finished rotating large array of {array_size} elements')
 
-    print('\n# sa_range example 1')
-    cases = [
-        (1, 3), (-1, 2), (0, 0), (0, -3),
-        (-95, -89), (-89, -95)]
-    for start, end in cases:
-        print(f"Start: {start: 4}, End: {end: 4}, {sa_range(start, end)}")
+    # print('\n# sa_range example 1')
+    # cases = [
+    #     (1, 3), (-1, 2), (0, 0), (0, -3),
+    #     (-95, -89), (-89, -95)]
+    # for start, end in cases:
+    #     print(f"Start: {start: 4}, End: {end: 4}, {sa_range(start, end)}")
 
     print('\n# is_sorted example 1')
     test_cases = (
