@@ -229,8 +229,34 @@ def remove_duplicates(arr: StaticArray) -> StaticArray:
     """
     TODO: Write this implementation
     """
-    pass
+    if(arr.length() == 1):
+      newArray = StaticArray(1)
+      newArray[0] = arr[0]
+      return newArray
+ 
+    counter = 0   # count of unique numbers
+    for i in range(0, arr.length() - 1):
+      if(arr[i] != arr[i + 1]):
+        counter += 1
+    counter += 1 # for last number
+    #print("counter", counter)
 
+    newArray = StaticArray(counter)
+
+    arrayOrder = 0
+    prevNumber = None
+    for i in range(0, arr.length()):
+      if(arr[i] != prevNumber or prevNumber == None):
+        newArray[arrayOrder] = arr[i]
+        arrayOrder += 1
+     
+      prevNumber = arr[i] 
+    return newArray
+    
+       
+
+
+  
 # ------------------- PROBLEM 9 - COUNT_SORT --------------------------------
 
 def count_sort(arr: StaticArray) -> StaticArray:
@@ -338,45 +364,45 @@ if __name__ == "__main__":
     # for start, end in cases:
     #     print(f"Start: {start: 4}, End: {end: 4}, {sa_range(start, end)}")
 
-    print('\n# is_sorted example 1')
-    test_cases = (
-        [-100, -8, 0, 2, 3, 10, 20, 100],
-        ['A', 'B', 'Z', 'a', 'z'],
-        ['Z', 'T', 'K', 'A', '5'],
-        [1, 3, -10, 20, -30, 0],
-        [-10, 0, 0, 10, 20, 30],
-        [100, 90, 0, -90, -200],
-        ['apple']
-    )
-    for case in test_cases:
-        arr = StaticArray(len(case))
-        for i, value in enumerate(case):
-            arr[i] = value
-        result = is_sorted(arr)
-        space = "  " if result and result >= 0 else " "
-        print(f"Result:{space}{result}, {arr}")
+    # print('\n# is_sorted example 1')
+    # test_cases = (
+    #     [-100, -8, 0, 2, 3, 10, 20, 100],
+    #     ['A', 'B', 'Z', 'a', 'z'],
+    #     ['Z', 'T', 'K', 'A', '5'],
+    #     [1, 3, -10, 20, -30, 0],
+    #     [-10, 0, 0, 10, 20, 30],
+    #     [100, 90, 0, -90, -200],
+    #     ['apple']
+    # )
+    # for case in test_cases:
+    #     arr = StaticArray(len(case))
+    #     for i, value in enumerate(case):
+    #         arr[i] = value
+    #     result = is_sorted(arr)
+    #     space = "  " if result and result >= 0 else " "
+    #     print(f"Result:{space}{result}, {arr}")
 
-    print('\n# find_mode example 1')
-    test_cases = (
-        [-820, -449, -435, -435, 24, 24, 473, 959],
-        [-820, -449, -435, -435, 24, 24, 24, 473, 959],
-        [-820, -820, -820, -449, -435, -435, 24, 24, 24, 473, 959],
-        [1, 20, 30, 40, 500, 500, 500],
-        [2, 2, 2, 2, 1, 1, 1, 1],
-        ["zebra", "sloth", "otter", "otter", "moose", "koala"],
-        ["Albania", "Belgium", "Chile", "Denmark", "Egypt", "Fiji"]
+    # print('\n# find_mode example 1')
+    # test_cases = (
+    #     [-820, -449, -435, -435, 24, 24, 473, 959],
+    #     [-820, -449, -435, -435, 24, 24, 24, 473, 959],
+    #     [-820, -820, -820, -449, -435, -435, 24, 24, 24, 473, 959],
+    #     [1, 20, 30, 40, 500, 500, 500],
+    #     [2, 2, 2, 2, 1, 1, 1, 1],
+    #     ["zebra", "sloth", "otter", "otter", "moose", "koala"],
+    #     ["Albania", "Belgium", "Chile", "Denmark", "Egypt", "Fiji"]
         
-    )
-    for case in test_cases:
-        arr = StaticArray(len(case))
-        for i, value in enumerate(case):
-            arr[i] = value
+    # )
+    # for case in test_cases:
+    #     arr = StaticArray(len(case))
+    #     for i, value in enumerate(case):
+    #         arr[i] = value
 
-        result = find_mode(arr)
-        if result:
-            print(f"{arr}\nMode: {result[0]}, Frequency: {result[1]}\n")
-        else:
-            print("find_mode() not yet implemented\n")
+    #     result = find_mode(arr)
+    #     if result:
+    #         print(f"{arr}\nMode: {result[0]}, Frequency: {result[1]}\n")
+    #     else:
+    #         print("find_mode() not yet implemented\n")
 
     print('# remove_duplicates example 1')
     test_cases = (
