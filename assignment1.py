@@ -214,9 +214,9 @@ def find_mode(arr: StaticArray) -> (int, int):
         elif(mode != arr[i]):
           tempFrequency += 1
       
-      if(frequency < tempFrequency):
-        frequency = tempFrequency
-        mode = arr[i]
+        if(frequency < tempFrequency):
+          frequency = tempFrequency
+          mode = arr[i]
     
         
       
