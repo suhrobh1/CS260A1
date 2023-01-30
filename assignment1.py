@@ -208,7 +208,7 @@ def find_mode(arr: StaticArray) -> (int, int):
       if(arr[i] == arr[i + 1]):
         if(mode == arr[i]):
           frequency += 1
-        elif(mode != arr[0] and frequency == 1):
+        elif(mode == arr[0] and frequency == 1):
           mode = arr[i]
           frequency += 1
         elif(mode != arr[i]):
@@ -356,10 +356,12 @@ if __name__ == "__main__":
 
     print('\n# find_mode example 1')
     test_cases = (
+        [-820, -449, -435, -435, 24, 24, 473, 959],
         [1, 20, 30, 40, 500, 500, 500],
         [2, 2, 2, 2, 1, 1, 1, 1],
         ["zebra", "sloth", "otter", "otter", "moose", "koala"],
         ["Albania", "Belgium", "Chile", "Denmark", "Egypt", "Fiji"]
+        
     )
     for case in test_cases:
         arr = StaticArray(len(case))
