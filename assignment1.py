@@ -263,7 +263,111 @@ def count_sort(arr: StaticArray) -> StaticArray:
     """
     TODO: Write this implementation
     """
-    pass
+    minMaxValues = min_max(arr)
+    min = minMaxValues[0]
+    max = minMaxValues[1]
+    print("min", min)
+    print("max", max)
+
+    negativeNumbers = False
+    
+    if(min < 0):
+        
+        numbersRange = abs(max - min)
+        numbersRange += 1
+        print("range", numbersRange)
+        negativeNumbers = True
+        for i in range(0, arr.length()):
+            #make new array here
+           # arr[i] += numbersRange # Will it always make it pos? 
+            arr[i] += min * (-1)
+        print("arr after range added", arr)
+        # min += numbersRange
+        # max += numbersRange
+        min += min * (-1)
+        max += min * (-1)
+        print("new min man", min, max)
+    else:
+        numbersRange = abs(max - min)
+        numbersRange += 1
+        print("range", numbersRange)
+
+    if(numbersRange > arr.length()):
+        count_array = StaticArray(numbersRange)
+    else:
+        count_array = StaticArray(arr.length())
+
+    for i in range(count_array.length()):
+      count_array[i] = 0
+
+        
+
+  
+    for i in range(0, arr.length()):
+        if(min == 0):
+            countIndex = arr[i]
+            print("Count index", countIndex)
+            count_array[countIndex] += 1
+            print("count_array after 1 added", count_array)
+        elif(min > 0 and not negativeNumbers):
+            countIndex = arr[i] - min
+            print("Count index", countIndex)
+            count_array[countIndex] += 1
+            print("count_array after 1 added", count_array)
+        elif(negativeNumbers):
+            # subtracting from each number in order to make the countIndex 0
+            print("Pow")
+            
+            countIndex = arr[i]
+            print("Count index", countIndex)
+            print(min)
+            count_array[countIndex] += 1
+           #count_array[0] = 1
+            print("count_array after 1 added", count_array)
+
+    for i in range(1, count_array.length()):
+        count_array[i] = count_array[i - 1] + count_array[i]
+    print("Count array after additions", count_array)
+    
+    newArray = StaticArray(arr.length())
+    print("new array length", newArray.length())
+    for i in range(0, newArray.length()):
+        if(min >= 0):
+            if(negativeNumbers):
+                
+                newArrayIndex = count_array[arr[arr.length() - 1 - i]] - 1 
+                #                              [ 7          - 1 -  1]
+                print("Bang!")
+                print("i", i)
+                print("new array index", newArrayIndex)
+                print("min", min)
+                newArray[newArray.length() - 1 - newArrayIndex] = arr[arr.length() - 1 - i] - (minMaxValues[0] * (-1))
+                print("new array", newArray)
+                count_array[arr[arr.length() - 1 - i]] -= 1
+            else:
+                print("Bing!")
+             
+                print("i", i)
+                print("min", min)
+                newArrayIndex = count_array[arr[arr.length() - 1 - i] - min ] - 1
+                print("new array index", newArrayIndex)
+                newArray[newArray.length() - 1 - newArrayIndex] = arr[arr.length() - 1 - i]
+                print("new array", newArray)
+                count_array[arr[arr.length() - 1 - i] - min ] -= 1
+        else:
+            newArrayIndex = count_array[arr[arr.length() - 1 - i]] - 1
+            newArray[newArray.length() - 1 - newArrayIndex] = arr[arr.length() - 1 - i]
+            
+            print("new array", newArray)
+            # decrementing the count of the element by one
+            count_array[arr[arr.length() - 1 - i]] -= 1
+            
+        # newArrayIndex = count_array[arr[arr.length() - 1 - i]] - 1
+        # newArray[newArray.length() - 1 - newArrayIndex] = arr[arr.length() - 1 - i]
+        # print("new array", newArray)
+    # print("count array", count_array)
+
+    return newArray
 
 # ------------------- PROBLEM 10 - SORTED SQUARES ---------------------------
 
@@ -404,22 +508,23 @@ if __name__ == "__main__":
     #     else:
     #         print("find_mode() not yet implemented\n")
 
-    print('# remove_duplicates example 1')
-    test_cases = (
-        [1], [1, 2], [1, 1, 2], [1, 20, 30, 40, 500, 500, 500],
-        [5, 5, 5, 4, 4, 3, 2, 1, 1], [1, 1, 1, 1, 2, 2, 2, 2]
-    )
-    for case in test_cases:
-        arr = StaticArray(len(case))
-        for i, value in enumerate(case):
-            arr[i] = value
-        print(arr)
-        print(remove_duplicates(arr))
-    print(arr)
+    # print('# remove_duplicates example 1')
+    # test_cases = (
+    #     [1], [1, 2], [1, 1, 2], [1, 20, 30, 40, 500, 500, 500],
+    #     [5, 5, 5, 4, 4, 3, 2, 1, 1], [1, 1, 1, 1, 2, 2, 2, 2]
+    # )
+    # for case in test_cases:
+    #     arr = StaticArray(len(case))
+    #     for i, value in enumerate(case):
+    #         arr[i] = value
+    #     print(arr)
+    #     print(remove_duplicates(arr))
+    # print(arr)
 
     print('\n# count_sort example 1')
     test_cases = (
-        [1, 2, 4, 3, 5], [5, 4, 3, 2, 1], [0, -5, -3, -4, -2, -1, 0],
+        [1, 2, 4, 3, 0],[1, 2, 4, 3, 0, 4],
+        [1, 2, 4, 3, 5], [5, 2, 4, 3, 5], [5, 4, 3, 2, 1], [0, -5, -3, -4, -2, -1, 0],
         [-3, -2, -1, 0, 1, 2, 3], [1, 2, 3, 4, 3, 2, 1, 5, 5, 2, 3, 1],
         [10100, 10721, 10320, 10998], [-100320, -100450, -100999, -100001],
     )
@@ -432,7 +537,7 @@ if __name__ == "__main__":
         result = count_sort(arr)
         after = result if len(case) < 50 else 'Finished sorting large array'
         print(f"After : {after}")
-
+        print("----------------------------------------------")
     print('\n# count_sort example 2')
     array_size = 5_000_000
     min_val = random.randint(-1_000_000_000, 1_000_000_000 - 998)
