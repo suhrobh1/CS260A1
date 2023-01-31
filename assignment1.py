@@ -361,11 +361,11 @@ def count_sort(arr: StaticArray) -> StaticArray:
             #print("new array", newArray)
             # decrementing the count of the element by one
             count_array[arr[arr.length() - 1 - i]] -= 1
+
+    for i in range(0, arr.length()):
+        if(minMaxValues[0] < 0):
+            arr[i] -= minMaxValues[0] * (-1)
             
-        # newArrayIndex = count_array[arr[arr.length() - 1 - i]] - 1
-        # newArray[newArray.length() - 1 - newArrayIndex] = arr[arr.length() - 1 - i]
-        # #print("new array", newArray)
-    # print("count array", count_array)
 
     return newArray
 
