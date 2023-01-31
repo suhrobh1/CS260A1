@@ -375,8 +375,40 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
     """
     TODO: Write this implementation
     """
-    pass
+    oddArray = False
+    
+    newArray = StaticArray(arr.length())
+    if(arr.length() % 2 == 0):
+        loopRange = arr.length() / 2
+    elif(arr.length() % 2 != 0):
+        loopRange = arr.length() // 2
+        oddArray = True
+    elif(arr.length() == 1):
+        newArray[0] = arr[0]*arr[0]
+        return newArray
 
+    if(arr[0] >= 0):
+        for i in range(0, newArray.length()):
+            newArray[i] = arr[i]*arr[i]
+    elif(arr[arr.length() - 1] == 0):
+        for i in range(0, newArray.length()):
+            newArray[newArray.length() - 1 - i] = arr[i]*arr[i]
+    # If first number is negative
+    else:
+        incrementStep = 0
+        for i in range(0, int(loopRange)):
+            if(abs(arr[i]) == abs(arr[arr.length() - 1 - i])):
+                newArray[newArray.length() - 1 - incrementStep] = arr[i] * arr[i]
+                newArray[newArray.length() - 2 - incrementStep] = arr[i] * arr[i]
+                incrementStep += 2
+            elif(abs(arr[i]) > abs(arr[arr.length() - 1 - i])):
+                newArray[newArray.length() - 1 - incrementStep] = arr[i] * arr[i]
+                newArray[newArray.length() - 2 - incrementStep] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
+
+            if(i == loopRange - 1 and oddArray):
+                    newArray[0] = arr[i + 1]
+
+    return newArray
 # ------------------- BASIC TESTING -----------------------------------------
 
 
@@ -521,39 +553,40 @@ if __name__ == "__main__":
     #     print(remove_duplicates(arr))
     # print(arr)
 
-    print('\n# count_sort example 1')
-    test_cases = (
-        [1, 2, 4, 3, 0],[1, 2, 4, 3, 0, 4],
-        [1, 2, 4, 3, 5], [5, 2, 4, 3, 5], [5, 4, 3, 2, 1], [0, -5, -3, -4, -2, -1, 0],
-        [-3, -2, -1, 0, 1, 2, 3], [1, 2, 3, 4, 3, 2, 1, 5, 5, 2, 3, 1],
-        [10100, 10721, 10320, 10998], [-100320, -100450, -100999, -100001],
-    )
-    for case in test_cases:
-        arr = StaticArray(len(case))
-        for i, value in enumerate(case):
-            arr[i] = value
-        before = arr if len(case) < 50 else 'Started sorting large array'
-        print(f"Before: {before}")
-        result = count_sort(arr)
-        after = result if len(case) < 50 else 'Finished sorting large array'
-        print(f"After : {after}")
-        print("----------------------------------------------")
-    print('\n# count_sort example 2')
-    array_size = 5_000_000
-    min_val = random.randint(-1_000_000_000, 1_000_000_000 - 998)
-    max_val = min_val + 998
-    case = [random.randint(min_val, max_val) for _ in range(array_size)]
-    arr = StaticArray(len(case))
-    for i, value in enumerate(case):
-        arr[i] = value
-    print(f'Started sorting large array of {array_size} elements')
-    result = count_sort(arr)
-    print(f'Finished sorting large array of {array_size} elements')
+    # print('\n# count_sort example 1')
+    # test_cases = (
+    #     [1, 2, 4, 3, 0],[1, 2, 4, 3, 0, 4],
+    #     [1, 2, 4, 3, 5], [5, 2, 4, 3, 5], [5, 4, 3, 2, 1], [0, -5, -3, -4, -2, -1, 0],
+    #     [-3, -2, -1, 0, 1, 2, 3], [1, 2, 3, 4, 3, 2, 1, 5, 5, 2, 3, 1],
+    #     [10100, 10721, 10320, 10998], [-100320, -100450, -100999, -100001],
+    # )
+    # for case in test_cases:
+    #     arr = StaticArray(len(case))
+    #     for i, value in enumerate(case):
+    #         arr[i] = value
+    #     before = arr if len(case) < 50 else 'Started sorting large array'
+    #     print(f"Before: {before}")
+    #     result = count_sort(arr)
+    #     after = result if len(case) < 50 else 'Finished sorting large array'
+    #     print(f"After : {after}")
+    #     print("----------------------------------------------")
+    # print('\n# count_sort example 2')
+    # array_size = 5_000_000
+    # min_val = random.randint(-1_000_000_000, 1_000_000_000 - 998)
+    # max_val = min_val + 998
+    # case = [random.randint(min_val, max_val) for _ in range(array_size)]
+    # arr = StaticArray(len(case))
+    # for i, value in enumerate(case):
+    #     arr[i] = value
+    # print(f'Started sorting large array of {array_size} elements')
+    # result = count_sort(arr)
+    # print(f'Finished sorting large array of {array_size} elements')
 
     print('\n# sorted_squares example 1')
     test_cases = (
         [1, 2, 3, 4, 5],
         [-5, -4, -3, -2, -1, 0],
+        [-4, -3, -2, -1, 0, 1, 2, 3, 4],
         [-3, -2, -2, 0, 1, 2, 3],
     )
     for case in test_cases:
