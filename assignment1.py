@@ -46,6 +46,7 @@ def fizz_buzz(arr: StaticArray) -> StaticArray:
             newArray.set(i, "fizz")
         elif(arr[i] % 5 == 0):
             newArray.set(i, "buzz")
+        # not divisible by either
         else:
             newArray.set(i, arr[i])
     return newArray
@@ -63,6 +64,7 @@ def reverse(arr: StaticArray) -> None:
       for i in range(0, loopRange):
         # print(i)
         # print(arr[arr.length() - 1 - i])
+        # Using temporary variable to perform 3 way swap
         temp = arr[i]
         arr[i] = arr[arr.length() - 1 - i]
         arr[arr.length() - 1 - i] = temp
@@ -271,20 +273,18 @@ def count_sort(arr: StaticArray) -> StaticArray:
     #print("max", max)
 
     negativeNumbers = False
-    
+
+    # If min number is negative, adding positive itself to make all numbers positive
     if(min < 0):
-        
         numbersRange = abs(max - min)
         numbersRange += 1
         #print("range", numbersRange)
         negativeNumbers = True
         for i in range(0, arr.length()):
             #make new array here
-           # arr[i] += numbersRange # Will it always make it pos? 
+           # array is temporarily modified to get positive numbers
             arr[i] += min * (-1)
-        #print("arr after range added", arr)
-        # min += numbersRange
-        # max += numbersRange
+        # new min and max numbers
         min += min * (-1)
         max += min * (-1)
         #print("new min man", min, max)
@@ -293,17 +293,17 @@ def count_sort(arr: StaticArray) -> StaticArray:
         numbersRange += 1
         #print("range", numbersRange)
 
+    # depending on whats larger, count_array will be that long
     if(numbersRange > arr.length()):
         count_array = StaticArray(numbersRange)
     else:
         count_array = StaticArray(arr.length())
 
+    # All array elems are now 0 insteadof None
     for i in range(count_array.length()):
       count_array[i] = 0
 
-        
-
-  
+    # For loop for counting occurences of elements based on value of min
     for i in range(0, arr.length()):
         if(min == 0):
             countIndex = arr[i]
@@ -318,7 +318,6 @@ def count_sort(arr: StaticArray) -> StaticArray:
         elif(negativeNumbers):
             # subtracting from each number in order to make the countIndex 0
             ##print("Pow")
-            
             countIndex = arr[i]
             ##print("Count index", countIndex)
             ##print(min)
@@ -331,17 +330,11 @@ def count_sort(arr: StaticArray) -> StaticArray:
     ##print("Count array after additions", count_array)
     
     newArray = StaticArray(arr.length())
-    ##print("new array length", newArray.length())
+    #print("new array length", newArray.length())
     for i in range(0, newArray.length()):
         if(min >= 0):
             if(negativeNumbers):
-                
                 newArrayIndex = count_array[arr[arr.length() - 1 - i]] - 1 
-                #                              [ 7          - 1 -  1]
-                #print("Bang!")
-                #print("i", i)
-                #print("new array index", newArrayIndex)
-                #print("min", min)
                 newArray[newArray.length() - 1 - newArrayIndex] = arr[arr.length() - 1 - i] - (minMaxValues[0] * (-1))
                 #print("new array", newArray)
                 count_array[arr[arr.length() - 1 - i]] -= 1
@@ -391,7 +384,7 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
         else:
             newArray[0] = arr[1] * arr[1]
             newArray[1] = arr[0] * arr[0]
-    
+    # loop range established here
     if(arr.length() % 2 == 0):
         loopRange = arr.length() / 2
     elif(arr.length() % 2 != 0):
@@ -410,11 +403,12 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
     else:
         incrementStep = 0
         for i in range(0, int(loopRange)):
+            # if first and large abs are equal, then last two elems in array are same
             if(abs(arr[i]) == abs(arr[arr.length() - 1 - i])):
                 newArray[newArray.length() - 1 - incrementStep] = arr[i] * arr[i]
                 newArray[newArray.length() - 2 - incrementStep] = arr[i] * arr[i]
                 incrementStep += 2
-                
+            # if first is larger than last
             elif(abs(arr[i]) > abs(arr[arr.length() - 1 - i])):
                 newArray[newArray.length() - 1 - i] = arr[i] * arr[i]
                 newArray[i] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
@@ -424,6 +418,7 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
                         newArray[i - 1] = newArray[i]
                         newArray[i] = temp
                 #incrementStep += 2
+            # if last is bigger then first
             elif(abs(arr[i]) < abs(arr[arr.length() - 1 - i])):
                 newArray[newArray.length() - 1 - incrementStep] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
                 newArray[newArray.length() - 2 - incrementStep] = arr[i] * arr[i]
