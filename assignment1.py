@@ -418,11 +418,11 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
             elif(abs(arr[i]) > abs(arr[arr.length() - 1 - i])):
                 newArray[newArray.length() - 1 - i] = arr[i] * arr[i]
                 newArray[i] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
-                if (newArray[1] != None):
-                    if(newArray[i] > newArray[i + 1]):
-                        temp = newArray[i] 
-                        newArray[i] = newArray[i + 1]
-                        newArray[i + 1] = temp
+                if (newArray[i] != None and i > 0):
+                    if(newArray[i - 1] > newArray[i]):
+                        temp = newArray[i - 1] 
+                        newArray[i - 1] = newArray[i]
+                        newArray[i] = temp
                 #incrementStep += 2
                 
             # elif(abs(arr[i]) < abs(arr[arr.length() - 1 - i])):
