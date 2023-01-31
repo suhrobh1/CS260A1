@@ -378,15 +378,26 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
     oddArray = False
     
     newArray = StaticArray(arr.length())
+    # Array of 1 elem
+    if(arr.length() == 1):
+        newArray[0] = arr[0]*arr[0]
+        return newArray
+    # array of 2 elem
+    elif(arr.length() == 2):
+        if(abs(arr[0]) < abs(arr[1])):
+            newArray[0] = arr[0] * arr[0]
+            newArray[1] = arr[1] * arr[1]
+        else:
+            newArray[0] = arr[1] * arr[1]
+            newArray[1] = arr[0] * arr[0]
+    
     if(arr.length() % 2 == 0):
         loopRange = arr.length() / 2
     elif(arr.length() % 2 != 0):
         loopRange = arr.length() // 2
         oddArray = True
-    elif(arr.length() == 1):
-        newArray[0] = arr[0]*arr[0]
-        return newArray
-
+    
+    
     if(arr[0] >= 0):
         for i in range(0, newArray.length()):
             newArray[i] = arr[i]*arr[i]
