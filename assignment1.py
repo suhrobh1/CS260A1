@@ -1,9 +1,9 @@
 # Name: Suhrob Hasanov
 # OSU Email:
 # Course:       CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: Assignment 1
+# Due Date: 1/30/23
+# Description: Python programming practice 
 
 
 import random
@@ -37,8 +37,9 @@ def fizz_buzz(arr: StaticArray) -> StaticArray:
     TODO: Write this implementation
     """
     newArray = StaticArray(arr.length())
-
+    
     for i in range(0, arr.length()):
+        
         if(arr[i] % 3 == 0 and arr[i] % 5 == 0):
             newArray.set(i, "fizzbuzz")
         elif(arr[i] % 3 == 0):
@@ -397,10 +398,11 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
         loopRange = arr.length() // 2
         oddArray = True
     
-    
+    # if first elem is zero
     if(arr[0] >= 0):
         for i in range(0, newArray.length()):
             newArray[i] = arr[i]*arr[i]
+    # if last elem is zero
     elif(arr[arr.length() - 1] == 0):
         for i in range(0, newArray.length()):
             newArray[newArray.length() - 1 - i] = arr[i]*arr[i]
@@ -412,12 +414,26 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
                 newArray[newArray.length() - 1 - incrementStep] = arr[i] * arr[i]
                 newArray[newArray.length() - 2 - incrementStep] = arr[i] * arr[i]
                 incrementStep += 2
+                
             elif(abs(arr[i]) > abs(arr[arr.length() - 1 - i])):
-                newArray[newArray.length() - 1 - incrementStep] = arr[i] * arr[i]
-                newArray[newArray.length() - 2 - incrementStep] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
-
-            if(i == loopRange - 1 and oddArray):
-                    newArray[0] = arr[i + 1]
+                newArray[newArray.length() - 1 - i] = arr[i] * arr[i]
+                newArray[i] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
+                if (newArray[1] != None):
+                    if(newArray[i] > newArray[i + 1]):
+                        temp = newArray[i] 
+                        newArray[i] = newArray[i + 1]
+                        newArray[i + 1] = temp
+                #incrementStep += 2
+                
+            # elif(abs(arr[i]) < abs(arr[arr.length() - 1 - i])):
+            #     newArray[newArray.length() - 1 - incrementStep] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
+            #     newArray[newArray.length() - 2 - incrementStep] = arr[i] * arr[i]
+                
+            if(i == loopRange - 1 and oddArray and arr[i + 1] == 0):
+                newArray[0] = arr[i + 1]
+            else:
+                newArray[i + 1] = arr[i + 1] * arr[i + 1]
+                
 
     return newArray
 # ------------------- BASIC TESTING -----------------------------------------
@@ -595,6 +611,7 @@ if __name__ == "__main__":
 
     print('\n# sorted_squares example 1')
     test_cases = (
+        [-6, -5, -3, 1, 2],
         [1, 2, 3, 4, 5],
         [-5, -4, -3, -2, -1, 0],
         [-4, -3, -2, -1, 0, 1, 2, 3, 4],
@@ -607,13 +624,14 @@ if __name__ == "__main__":
         print(arr)
         result = sorted_squares(arr)
         print(result)
+        print("------------------------------")
 
-    print('\n# sorted_squares example 2')
-    array_size = 5_000_000
-    case = [random.randint(-10 ** 9, 10 ** 9) for _ in range(array_size)]
-    arr = StaticArray(len(case))
-    for i, value in enumerate(sorted(case)):
-        arr[i] = value
-    print(f'Started sorting large array of {array_size} elements')
-    result = sorted_squares(arr)
-    print(f'Finished sorting large array of {array_size} elements')
+    # print('\n# sorted_squares example 2')
+    # array_size = 5_000_000
+    # case = [random.randint(-10 ** 9, 10 ** 9) for _ in range(array_size)]
+    # arr = StaticArray(len(case))
+    # for i, value in enumerate(sorted(case)):
+    #     arr[i] = value
+    # print(f'Started sorting large array of {array_size} elements')
+    # result = sorted_squares(arr)
+    # print(f'Finished sorting large array of {array_size} elements')
