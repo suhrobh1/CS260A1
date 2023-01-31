@@ -423,11 +423,12 @@ def sorted_squares(arr: StaticArray) -> StaticArray:
                 newArray[newArray.length() - 1 - incrementStep] = arr[arr.length() - 1 - i] * arr[arr.length() - 1 - i]
                 newArray[newArray.length() - 2 - incrementStep] = arr[i] * arr[i]
                 incrementStep += 2
-                if(newArray[newArray.length() - i - 1] < newArray[newArray.length() - i - 2]):
-                    print("POW!")
-                    temp = newArray[newArray.length() - i - 2]
-                    newArray[newArray.length() - i - 2] = newArray[newArray.length() - i - 1] 
-                    newArray[newArray.length() - i - 1] = temp
+                if(newArray[newArray.length() - i - 2] and i > 1):
+                    if(newArray[newArray.length() - i - 1] < newArray[newArray.length() - i - 2]):
+                        print("POW!")
+                        temp = newArray[newArray.length() - i - 2]
+                        newArray[newArray.length() - i - 2] = newArray[newArray.length() - i - 1] 
+                        newArray[newArray.length() - i - 1] = temp
             if(i == loopRange - 1 and oddArray and arr[i + 1] == 0):
                 newArray[0] = arr[i + 1]
             elif(oddArray):
